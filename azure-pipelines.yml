@@ -11,7 +11,7 @@ pool:
 
 container: 
   image: ubuntu:18.04
-  options: --env EVENT_TYPE="DEPLOYMENT"
+  options: -e EVENT_TYPE=DEPLOYMENT -e DT_ENV=https://jwl50038.sprint.dynatracelabs.com
 
 steps:
 - script: printenv
