@@ -9,7 +9,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-18.04'
 
-container: ubuntu:18.04
+container: 
+  image: ubuntu:18.04
+  options: --env EVENT_TYPE="DEPLOYMENT"
 
 steps:
 - script: printenv
