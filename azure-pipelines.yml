@@ -9,8 +9,28 @@ trigger:
 pool:
   vmImage: 'ubuntu-18.04'
 
+variables:
+- name: DT_SOURCE
+  value: 'Azude DevOps'
+- name: DT_DEPLOYMENT_NAME
+  value: 'k8s-staging'
+- name: DT_DEPLOYMENT_VERSION
+  value: '1.0.0'
+- name: DT_EVENT_TYPE
+  value: 'CUSTOM_DEPLOYMENT'
+- name: DT_CUSTOM_PROPERTIES
+  value: '{"Project": "sockshop","Stage": "dev"}'
+- name: DT_TAGS
+  value: '[{"meTypes":["HOST"],"tags":[{"context":"CONTEXTLESS","key":"hostenv","value":"prod"},{"context":"CONTEXTLESS","key":"hostapp","value":"carts"}]}]'
+
 steps:
 - script: |
     docker run --rm -e DT_ENV_URL=$(DYNATRACE_ENVIRONMENT_URL) \
+    -e EVENT_SOURCE=$(DT_SOURCE) \
+    -e EVENT_DEPLOYMENTNAME=$(DT_DEPLOYMENT_NAME) \
+    -e EVENT_DEPLOYMENTVERSION=$(DT_DEPLOYMENT_VERSION) \
+    -e EVENT_EVENTTYPE=$(DT_EVENT_TYPE) \
+    -e EVENT_CUSTOMPROPERTIES="$(DT_CUSTOM_PROPERTIES)" \
+    -e EVENT_TAGRULES="$(DT_TAGS)" \
     -e DT_API_TOKEN=$(DYNATRACE_API_TOKEN) luisescobar/dynatrace-push-event:1.0.0
   displayName: 'push event'
