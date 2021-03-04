@@ -11,7 +11,7 @@ pool:
 
 variables:
 - name: DT_SOURCE
-  value: 'Azude DevOps'
+  value: 'Azure DevOps'
 - name: DT_DEPLOYMENT_NAME
   value: 'k8s-staging'
 - name: DT_DEPLOYMENT_VERSION
@@ -26,5 +26,6 @@ variables:
 steps:
 - script: |
     docker run --rm -e DT_ENV_URL=$(DYNATRACE_ENVIRONMENT_URL) \
+    -e EVENT_SOURCE=$(DT_SOURCE) \
     -e DT_API_TOKEN=$(DYNATRACE_API_TOKEN) luisescobar/dynatrace-push-event:1.0.0
   displayName: 'push event'
