@@ -26,6 +26,6 @@ variables:
 steps:
 - script: |
     docker run --rm -e DT_ENV_URL=$(DYNATRACE_ENVIRONMENT_URL) \
-    -e EVENT_SOURCE="Azure DevOps"
+    -e EVENT_SOURCE="Azure DevOps" \
     -e DT_API_TOKEN=$(DYNATRACE_API_TOKEN) luisescobar/dynatrace-push-event:1.0.0
   displayName: 'push event'
