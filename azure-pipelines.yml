@@ -14,7 +14,7 @@ container:
   options:  -e DT_ENV_URL=$(DYNATRACE_ENVIRONMENT_URL) -e EVENT_EVENTTYPE=CUSTOM_DEPLOYMENT
 
 steps:
-- script: |-
+- script: |
     docker run --rm -e DT_ENV_URL=$(DYNATRACE_ENVIRONMENT_URL) \
     -e DT_API_TOKEN=$(DYNATRACE_API_TOKEN) luisescobar/dynatrace-push-event:1.0.0
   displayName: 'docker build'
