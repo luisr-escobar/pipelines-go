@@ -10,8 +10,8 @@ pool:
   vmImage: 'ubuntu-18.04'
 
 container: 
-  image: ubuntu:18.04
-  options: -e EVENT_TYPE=DEPLOYMENT -e DT_ENV=https://jwl50038.sprint.dynatracelabs.com
+  image: luisescobar/dynatrace-push-event:1.0.0
+  options:  -e DT_ENV_URL=$(DYNATRACE_ENVIRONMENT_URL) -e EVENT_EVENTTYPE=CUSTOM_DEPLOYMENT
 
 steps:
-- script: printenv
+- script: ./dynatrace-push-event
